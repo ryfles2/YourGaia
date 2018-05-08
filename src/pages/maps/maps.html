@@ -17,7 +17,7 @@
 
 <div id="mapsButtonGroup">
   <button ion-button full class="mapsButton" (click)='changeLengthRoute();'> {{ lengthRouteLabel }} </button>
-  <button ion-button full class="mapsButton">Change the trip</button>
-  <button ion-button full class="mapsButton">Start</button>
+  <button ion-button full class="mapsButton" (click)='changeTrip();'>Change the trip</button>
+  <button ion-button full class="mapsButton" (click)='startTrip();'>Start</button>
 </div>
 </ion-content>
