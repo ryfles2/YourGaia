@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -7,7 +7,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+declare var google:any;
 var lengthRouteLabel:any;
 
 @IonicPage()
@@ -17,6 +17,8 @@ var lengthRouteLabel:any;
 })
 export class MapsPage {
 
+  map:any;
+  @ViewChild('map') mapRef: ElementRef;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     lengthRoute = 1;
     lengthRouteLabel = "Short";
@@ -24,6 +26,7 @@ export class MapsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapsPage');
+    this.showMap();
   }
 
   changeLengthRoute(){
@@ -44,6 +47,14 @@ export class MapsPage {
       break;
     }
   }
+  showMap(){
+    const location = new google.maps.LatLng(51.507351, -0.127758);
+
+    const options ={ 
+       center: location,
+       zoom: 10}
+   this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+  } 
 }
 var lengthRoute;
 
