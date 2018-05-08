@@ -8,7 +8,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-var lengthRouteLabel:any;
+//var lengthRouteLabel:any;
 
 @IonicPage()
 @Component({
@@ -17,9 +17,10 @@ var lengthRouteLabel:any;
 })
 export class MapsPage {
 
+  lengthRouteLabel: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     lengthRoute = 1;
-    lengthRouteLabel = "Short";
+    this.lengthRouteLabel = "Short";
   }
 
   ionViewDidLoad() {
@@ -31,16 +32,15 @@ export class MapsPage {
     {
       case 1:
       lengthRoute=2;
-      lengthRouteLabel = "Medium";
-      console.log(lengthRouteLabel);
+      this.lengthRouteLabel = "Medium";
       break;
       case 2:
       lengthRoute=3;
-      lengthRouteLabel = "Long";
+      this.lengthRouteLabel = "Long";
       break;
       case 3:
       lengthRoute=1;
-      lengthRouteLabel = "Short";
+      this.lengthRouteLabel = "Short";
       break;
     }
   }
