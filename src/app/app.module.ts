@@ -9,13 +9,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MenuPage } from '../pages/menu/menu';
 import { MapsPage } from '../pages/maps/maps';
+import { InfoPage } from '../pages/info/info';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     MenuPage,
-    MapsPage
+    MapsPage,
+    InfoPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import { MapsPage } from '../pages/maps/maps';
     MyApp,
     HomePage,
     MenuPage,
-    MapsPage
+    MapsPage,
+    InfoPage
   ],
   providers: [
     StatusBar,

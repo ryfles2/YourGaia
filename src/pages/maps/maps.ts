@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
+import { InfoPage } from '../info/info';
 /**
  * Generated class for the MapsPage page.
  *
@@ -21,13 +22,14 @@ export class MapsPage {
   lat:any;
   lng:any;
   map:any;
+  infoPage = InfoPage;
   @ViewChild('map') mapRef: ElementRef;
 
   lengthRouteLabel: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public geolocation: Geolocation) {
     lengthRoute = 1;
-    this.lengthRouteLabel = "Short";
+    this.lengthRouteLabel = "Show places";
   }
 
   ionViewDidLoad() {
@@ -58,17 +60,17 @@ export class MapsPage {
       case 1:
       lengthRoute=2;
       this.showShortTraces();
-      this.lengthRouteLabel = "Medium";1
+      this.lengthRouteLabel = "Short";1
       break;
       case 2:
       lengthRoute=3;
       this.showMediumTraces();
-      this.lengthRouteLabel = "Long";
+      this.lengthRouteLabel = "Medium";
       break;
       case 3:
       lengthRoute=1;
       this.showLongTraces();
-      this.lengthRouteLabel = "Short";
+      this.lengthRouteLabel = "Long";
       break;
     }
   }
