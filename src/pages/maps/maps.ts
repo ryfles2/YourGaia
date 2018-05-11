@@ -49,7 +49,7 @@ export class MapsPage {
 
     console.log('ionViewDidLoad MapsPage');
     this.showMap();
-    this.showShortTraces();
+   // this.showShortTraces();
   }
 
   changeLengthRoute(){
@@ -57,14 +57,17 @@ export class MapsPage {
     {
       case 1:
       lengthRoute=2;
-      this.lengthRouteLabel = "Medium";
+      this.showShortTraces();
+      this.lengthRouteLabel = "Medium";1
       break;
       case 2:
       lengthRoute=3;
+      this.showMediumTraces();
       this.lengthRouteLabel = "Long";
       break;
       case 3:
       lengthRoute=1;
+      this.showLongTraces();
       this.lengthRouteLabel = "Short";
       break;
     }
@@ -80,28 +83,7 @@ export class MapsPage {
    dogwalker.setMap(this.map);
   }
   
-  initTraces(){
-    const Cantinho = new MyMarker(41.1250499,-8.6470055,"Cantinho das Aromáticas");
-    const Zoo = new MyMarker(41.0927201,-8.5394872, "Zoo Santo Inácio");
-    const Biological = new MyMarker(41.0978171,-8.5558548,"Biological Park");
-    const Quintinha = new MyMarker(41.0702118,-8.6032337,"Quintinha Pedagógica Andreia Moreira");
-    const Municipal = new MyMarker(41.0411643,-8.652459,"Municipal swimming pool of Granja");
   
-    shortTrace.push(Cantinho);
-    shortTrace.push(Zoo);
-    shortTrace.push(Biological);
-    
-    mediumTrace.push(Cantinho);
-    mediumTrace.push(Zoo);
-    mediumTrace.push(Biological);
-    mediumTrace.push(Quintinha);
-    
-    longTrace.push(Cantinho);
-    longTrace.push(Zoo);
-    longTrace.push(Biological);
-    longTrace.push(Quintinha);
-  
-  }
 
   showShortTraces(){
     var firstLoc = new google.maps.LatLng(41.1250499, -8.6470055);
@@ -116,8 +98,38 @@ export class MapsPage {
   }
 
   showMediumTraces(){
-    
+    var firstLoc = new google.maps.LatLng(41.1250499, -8.6470055);
+    var first = new google.maps.Marker({position:firstLoc,title:"Cantinho das Aromáticas"});
+    var secondLoc = new google.maps.LatLng(41.0978171,-8.5558548);
+    var second = new google.maps.Marker({position:secondLoc,title:"Biological Park"});
+    var thirdLoc = new google.maps.LatLng(41.0927201,-8.5394872);
+    var third = new google.maps.Marker({position:thirdLoc,title:"Zoo Santo Inácio"});
+    var fourthLoc = new google.maps.LatLng(41.0702118,-8.6032337);
+    var four = new google.maps.Marker({position:fourthLoc,title:"Quintinha Pedagógica Andreia Moreira"});
+    first.setMap(this.map);
+    second.setMap(this.map);
+    third.setMap(this.map);
+    four.setMap(this.map);
   }
+
+  showLongTraces(){
+    var firstLoc = new google.maps.LatLng(41.1250499, -8.6470055);
+    var first = new google.maps.Marker({position:firstLoc,title:"Cantinho das Aromáticas"});
+    var secondLoc = new google.maps.LatLng(41.0978171,-8.5558548);
+    var second = new google.maps.Marker({position:secondLoc,title:"Biological Park"});
+    var thirdLoc = new google.maps.LatLng(41.0927201,-8.5394872);
+    var third = new google.maps.Marker({position:thirdLoc,title:"Zoo Santo Inácio"});
+    var fourthLoc = new google.maps.LatLng(41.0702118,-8.6032337);
+    var four = new google.maps.Marker({position:fourthLoc,title:"Quintinha Pedagógica Andreia Moreira"});
+    var fithLoc = new google.maps.LatLng(41.0411643,-8.652459);
+    var fith = new google.maps.Marker({position:fithLoc,title:"Municipal swimming pool of Granja"});
+    first.setMap(this.map);
+    second.setMap(this.map);
+    third.setMap(this.map);
+    four.setMap(this.map);
+    fith.setMap(this.map);
+  }
+
 }
 
 
