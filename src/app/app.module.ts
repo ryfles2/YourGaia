@@ -8,6 +8,9 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MenuPage } from '../pages/menu/menu';
 import { MapsPage } from '../pages/maps/maps';
+import { Geolocation } from '@ionic-native/geolocation'
+import { IonicStorageModule} from '@ionic/storage'
+
 
 @NgModule({
   declarations: [
@@ -18,7 +21,8 @@ import { MapsPage } from '../pages/maps/maps';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -30,6 +34,8 @@ import { MapsPage } from '../pages/maps/maps';
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
+    Storage,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

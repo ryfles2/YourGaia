@@ -1,5 +1,15 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
+import { Subscription } from 'rxjs/Subscription';
+import { Geolocation } from '@ionic-native/geolocation';
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  Marker,
+  GoogleMapsAnimation,
+  MyLocation
+} from '@ionic-native/google-maps';
 
 /**
  * Generated class for the MapsPage page.
@@ -8,7 +18,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-declare var google:any;
+declare var google;
 
 
 @IonicPage()
@@ -19,21 +29,21 @@ declare var google:any;
 export class MapsPage {
 
 
-  map:any;
-  @ViewChild('map') mapRef: ElementRef;
+  map:GoogleMap;
+  
 
   lengthRouteLabel: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private plt: Platform, private geolocation: Geolocation,
+     private alerrtCtrl: AlertController)  {
     lengthRoute = 1;
     this.lengthRouteLabel = "Short";
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MapsPage');
     this.initTraces();
     this.showMap();
-    this.showShortTrace();
+   // this.showShortTrace();
   }
 
   changeLengthRoute(){
@@ -54,21 +64,26 @@ export class MapsPage {
     }
   }
   showMap(){
-    const location = new google.maps.LatLng(51.507351, -0.127758);
-    const marker = new Marker(41.1250499,-8.6470055,"felek");
-    const location1 = new  google.maps.LatLng(marker.getLat(),marker.getLng());
-    const options ={ 
-       center: location1,
-       zoom: 10}
-   this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+    this.map = GoogleMaps.create('map_canvas',{
+      camera: {
+        target: {
+          lat: 43.0741704,
+          lng: -89.3809802
+        },
+        zoom: 18,
+        tilt: 30
+      }
+    });
+
+   
   } 
 
   initTraces(){
-    const Cantinho = new Marker(41.1250499,-8.6470055,"Cantinho das Aromáticas");
-    const Zoo = new Marker(41.0927201,-8.5394872, "Zoo Santo Inácio");
-    const Biological = new Marker(41.0978171,-8.5558548,"Biological Park");
-    const Quintinha = new Marker(41.0702118,-8.6032337,"Quintinha Pedagógica Andreia Moreira");
-    const Municipal = new Marker(41.0411643,-8.652459,"Municipal swimming pool of Granja");
+    const Cantinho = new MyMarker(41.1250499,-8.6470055,"Cantinho das Aromáticas");
+    const Zoo = new MyMarker(41.0927201,-8.5394872, "Zoo Santo Inácio");
+    const Biological = new MyMarker(41.0978171,-8.5558548,"Biological Park");
+    const Quintinha = new MyMarker(41.0702118,-8.6032337,"Quintinha Pedagógica Andreia Moreira");
+    const Municipal = new MyMarker(41.0411643,-8.652459,"Municipal swimming pool of Granja");
 
     shortTrace.push(Cantinho);
     shortTrace.push(Zoo);
@@ -87,9 +102,6 @@ export class MapsPage {
   }
 
   showShortTrace(){
-    console.log("start");
-    
-    
     for(let marker of shortTrace){
       var location = new google.maps.LatLng(marker.latitude, marker.longitude);
       var myMarker = new google.maps.Marker({position: location, title: marker.title});
@@ -99,12 +111,13 @@ export class MapsPage {
 
 }
 var lengthRoute;
+var mapReady = false;
 var shortTrace = [];
 var mediumTrace =[];
 var longTrace = [];
 
 
-class Marker {
+class MyMarker {
   lat;
   lng;
   name;
